@@ -38,7 +38,25 @@ class StaffPositionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $Position = new staff_position();
+
+        $Position->staff_id = $request->staff;
+        $Position->staff_description = $request->description;
+        $Position->current_salary = $request->salary;
+        $Position->salary_scale = $request->scale;
+
+
+        $saveStaff = $Position->save();
+
+        if($saveStaff){
+            $response = APIHelper::APIResponse(false,200,'Staff position created successfully',null);
+            return response()->json($response,200);
+        }else{
+            $response = APIHelper::APIResponse(true,'Failed to create staff position',null);
+            return response()->json($response,400);
+        }
+        
+       
     }
 
     /**
@@ -49,7 +67,14 @@ class StaffPositionController extends Controller
      */
     public function show($id)
     {
-        //
+        $FindStaff = staff_position::find($id);
+        if(empty($FindStaff)){
+            $response = APIHelper::APIResponse(true,200,'Cannot Find Staff',$FindStaff);
+            return response()->json($response,200);
+        }else{
+            $response = APIHelper::APIResponse(false,200,'',$FindStaff);
+            return response()->json($response,200);
+        }
     }
 
     /**
@@ -72,7 +97,21 @@ class StaffPositionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $Position = staff_position::find($id); 
+        $Position->staff_id = $request->staff;
+        $Position->staff_description = $request->description;
+        $Position->current_salary = $request->salary;
+        $Position->salary_scale = $request->scale;
+
+        $UpdateStaff = $Position->save();
+
+        if($UpdateStaff){
+            $response = APIHelper::APIResponse(false,200,'Staff updated successfully',null);
+            return response()->json($response,200);
+        }else{
+            $response = APIHelper::APIResponse(true,'Failed to update staff',null);
+            return response()->json($response,400);
+        }
     }
 
     /**
@@ -83,6 +122,15 @@ class StaffPositionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $staff = staff_position::find($id);
+        $deleteStaff = $staff->delete();
+
+        if($deleteStaff){
+            $response = APIHelper::APIResponse(false,200,'Staff deleted successfully',null);
+            return response()->json($response,200);
+        }else{
+            $response = APIHelper::APIResponse(true,'Failed to delete staff',null);
+            return response()->json($response,400);
+        }
     }
 }
