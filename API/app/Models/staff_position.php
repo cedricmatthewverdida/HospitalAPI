@@ -9,7 +9,7 @@ class staff_position extends Model
 {
     use HasFactory;
     public $timestamps = false;
-
+    
     protected $table = 'staff_position';
 
     protected $fillable = [
@@ -17,6 +17,6 @@ class staff_position extends Model
         'staff_id',
         'staff_description',
         'current_salary',
-        'salary_scales'
+        'salary_scale'
     ];
 }
