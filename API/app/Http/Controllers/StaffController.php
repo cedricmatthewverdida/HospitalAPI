@@ -107,7 +107,7 @@ class StaffController extends Controller
         $staff->telephone_number =  $request->number;
         $staff->date_of_birth = $request->birthday;
         $staff->sex = $request->gender;
-        $staff->nin = "Yawa";
+        $staff->nin = APIHelper::GENERATE_NIN();
 
         $UpdateStaff = $staff->save();
 

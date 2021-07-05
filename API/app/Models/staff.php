@@ -9,8 +9,6 @@ class staff extends Model
 {
     use HasFactory;
 
-    public $timestamps = false; 
-
     protected $fillable = [
         'id ',
         'staff_fname',

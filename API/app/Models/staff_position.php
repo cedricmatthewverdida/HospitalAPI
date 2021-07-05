@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class staff_position extends Model
 {
     use HasFactory;
-    public $timestamps = false;
+    
     
     protected $table = 'staff_position';
 
